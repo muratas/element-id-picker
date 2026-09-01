@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Element ID Picker",
+  "version": "1.0.0",
+  "description": "クリックした要素の情報（セレクタ・クラス・React情報など）をAIに伝えやすい形式でクリップボードにコピーします。",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Element ID Picker: クリックで有効/無効を切り替え",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
