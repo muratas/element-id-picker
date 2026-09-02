@@ -75,6 +75,21 @@
       .catch(() => showToast("コピーに失敗しました", true));
   }
 
+  // 表示中のビューポート幅からおおよそのデバイス種別を判定する。
+  function classifyViewport(width) {
+    if (width < 768) return "mobile";
+    if (width < 1024) return "tablet";
+    return "desktop";
+  }
+
+  function describeViewport() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
+    const kind = classifyViewport(width);
+    return `${width}x${height} (${kind}, dpr=${dpr})`;
+  }
+
   function describeElement(el) {
     const tag = el.tagName.toLowerCase();
     const id = el.id ? `#${el.id}` : "";
@@ -92,6 +107,7 @@
     const lines = [];
     lines.push("## Element picked (Element ID Picker)");
     lines.push("");
+    lines.push(`Viewport: ${describeViewport()}`);
     lines.push(`Selector: \`${selector}\``);
     lines.push(`Tag: ${tag}${id}`);
     lines.push(`Classes: ${classList.length ? classList.join(", ") : "(none)"}`);
